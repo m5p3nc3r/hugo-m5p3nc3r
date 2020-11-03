@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{- partial "head.html" . -}}
+<body>
+    {{- partial "header.html" . -}}
+    <section class = "section">
+        <div class = "container">
+            <div class = "content">
+                <main>
+                    {{ .Content }}
+                    <ul>
+                    {{ range .Pages.ByDate.Reverse }}
+                    <li>
+                        <a href="{{.Permalink}}"><b>{{.Date.Format "2006-01-02"}}</b> | {{.Title}}</a>
+                    </li>
+                    {{ end }}
+                    </ul>
+                </main>
+            </div>
+        </div>
+    </section>
+    {{- partial "footer.html" . -}}
+</body>
+
+</html>

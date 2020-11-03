@@ -1,0 +1,33 @@
+{{ $dir := path.Join "content" .Page.Dir }}
+
+<div class="columns is-multiline">
+{{ range readDir $dir }}
+    {{ $board := .Name }}
+    {{ if .IsDir }}
+        {{ with $.Site.GetPage (path.Join $dir .Name "_index.md") }}
+            <div class="column is-one-third">
+                <a href="{{$board}}">
+                    <div class="card">
+                        <div class="card-header"
+                            style="position: absolute; z-index: 1; width: 100%; background-color: #4444;">
+                            <span class="title">{{.Title}}</span>
+                        </div>
+                        <div class="card-image">
+                            {{ with .Params.card_image }}
+                            <figure class="image is-4by3">
+                                <img src="{{.}}" alt="Placeholder image">
+                            </figure>
+                            {{ else }}
+                            <figure class="image is-4by3">
+                            </figure>
+                            {{ end }}
+                        </div>
+                      
+                        <p class="content">{{ .Description }}</p>
+                    </div>
+                </a>
+            </div>
+        {{ end }}
+    {{ end }}
+{{ end }}
+</div>
